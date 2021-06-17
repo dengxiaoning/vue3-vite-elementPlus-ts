@@ -21,12 +21,12 @@
 		</div>
 		<div style="flex:6;height:100%;display: flex;align-items: center;justify-content: flex-end;padding-right: 40px;">
 			<el-image
-				style="width: 40px; height: 80%;border-radius: 50%;margin-right: 15px;"
+				style="width: 40px; height: 80%;border-radius: 50%;margin-right: 15px;cursor: pointer"
 				src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
 				fit="cover">
 	 		</el-image>
 			<el-dropdown>
-				<span class="el-dropdown-link">
+				<span class="el-dropdown-link" style="cursor: pointer">
 					下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
 				</span>
 				<template #dropdown>
