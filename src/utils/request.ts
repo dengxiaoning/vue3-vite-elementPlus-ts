@@ -1,3 +1,4 @@
+
 import axios, {
   AxiosInstance,
   AxiosRequestConfig,
@@ -13,8 +14,9 @@ function getSession(key: string) {
   return JSON.parse(json)
 }
 
+//读取 环境
 export const PATH_URL:string  =  import.meta.env.VITE_GLOB_API_URL as string
-
+console.log(PATH_URL,"PATH_URLPATH_URLPATH_URL")
 // 配置新建一个 axios 实例
 const service: AxiosInstance = axios.create({
   baseURL: PATH_URL,

@@ -22,11 +22,12 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
 
   // The boolean type read by loadEnv is a string. This function can be converted to boolean type
   const viteEnv = wrapperEnv(env)
-
+  
   const {
     VITE_PORT,
     VITE_USE_MOCK,
     VITE_BUILD_COMPRESS,
+    VITE_GLOB_API_URL,
     VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE
   } = viteEnv
 
@@ -51,7 +52,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         views: resolve('src/views'),
         store: resolve('src/store'),
         routes: resolve('src/routes'),
-        styles: resolve('src/styles')
+        styles: resolve('src/styles'),
+        hooks: resolve('src/hooks'),
       }
     },
     server: {
@@ -64,15 +66,26 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       //服务器启动时自动在浏览器中打开应用程序,当此值为字符串时，会被用作 URL 的路径名
       open: false,
       //自定义代理规则
-      proxy: {
-        // 选项写法
-        '/api': {
-          target: 'http://localhost:' + VITE_PORT,
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
-        }
-      }
+      // proxy: {
+      //   // 选项写法
+      //   '/api': {
+      //     target: 'http://test.zt.guangquzhihe.com/',
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api/, '')
+      //   }
+      // }
     },
+    // server: {
+    //   host: 'localhost',
+    //   port: VITE_PORT,
+    //   https: false,
+    //   proxy: {
+    //       '^/(masterdataDomain|taskDomain|userDomain|pim/admin|oms/admin)': {
+    //           target: 'http://dev.backendapi.aid.connext.net.cn/' // 开发
+    //         // target: 'http://test.backendapi.aid.connext.net.cn/' // 测试
+    //         }
+    //     }
+    // },
     build:{
       rollupOptions:{
         // input: 'app.js',
@@ -82,6 +95,27 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         //     'elementPlus': 'https://unpkg.com/element-plus@1.0.2-beta.44/lib/index.js'
         //   }
         // }
+        output: {
+          assetFileNames: 'css/[name].[hash].css',
+          chunkFileNames: 'js/[name].[hash].js',
+          entryFileNames: 'js/[name].[hash].js',
+          manualChunks(id) {
+            //打包chunk命名和代码分割
+            const chunkMap = new Map();
+            chunkMap.set(/[\\/]src[\\/]layout[\\/]/.test(id), 'basicLayout');
+            chunkMap.set(/[\\/]src[\\/]components[\\/]/.test(id), 'basicComponent');
+            chunkMap.set(/[\\/]node_modules[\\/]/.test(id), 'vendors');
+            chunkMap.set(/[\\/]node_modules[\\/]echarts[\\/]/.test(id), 'echarts');
+            chunkMap.set(/[\\/]node_modules[\\/]lodash[\\/]/.test(id), 'lodash');
+            chunkMap.set(/[\\/]node_modules[\\/]moment[\\/]/.test(id), 'moment');
+            chunkMap.set(/[\\/]node_modules[\\/]xlsx[\\/]xlsx.js/.test(id), 'xlsxIndex');
+            chunkMap.set(/[\\/]node_modules[\\/]xlsx[\\/](?!(xlsx.js))/.test(id), 'xlsx');
+            chunkMap.set(/[\\/]node_modules[\\/]element-plus[\\/]/.test(id), 'element');
+            if(chunkMap.get(true)) return chunkMap.get(true);
+          }
+        },
+        
+
       },
     }
   })

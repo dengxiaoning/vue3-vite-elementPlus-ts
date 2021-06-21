@@ -1,3 +1,4 @@
+
 /**
  * Plugin to minimize and use ejs template syntax in index.html.
  * https://github.com/anncwb/vite-plugin-html
@@ -11,9 +12,9 @@
 
  export function configHtmlPlugin(env: ViteEnv, isBuild: boolean) {
    const { VITE_GLOB_APP_TITLE, VITE_PUBLIC_PATH } = env;
- 
+
    const path = VITE_PUBLIC_PATH.endsWith('/') ? VITE_PUBLIC_PATH : `${VITE_PUBLIC_PATH}/`;
- 
+  
    const getAppConfigSrc = () => {
      return `${path || '/'}_app.config.js?v=${pkg.version}-${new Date().getTime()}`;
    };

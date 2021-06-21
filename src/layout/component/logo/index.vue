@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-logo" v-if="setShowLogo" @click="goHome">
+  <div class="layout-logo" v-if="!setShowLogo" @click="goHome">
     <img src="@/assets/logo.png" class="layout-logo-medium-img" />
     <span>{{ getThemeConfig.globalTitle }}</span>
   </div>
@@ -24,11 +24,7 @@ import { useRoute, useRouter } from 'vue-router'
       })
       // 设置显示/隐藏 logo
       const setShowLogo = computed(() => {
-        let { layout, isShowLogo } = store.state.themeConfig
-        return (
-          (isShowLogo && layout === 'defaults') ||
-          (isShowLogo && layout === 'columns')
-        )
+        return  store.state.themeConfig.isCollapse
       })
       // logo 点击实现菜单展开/收起
       const onThemeConfigChange = () => {

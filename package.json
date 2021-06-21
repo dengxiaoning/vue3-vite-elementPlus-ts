@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
+    "test": "vite --mode test",
     "build": "vite build",
     "strictbuild": "vue-tsc --noEmit && vite build",
     "serve": "vite preview"
@@ -10,6 +11,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "element-plus": "^1.0.2-beta.41",
+    "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.6",
