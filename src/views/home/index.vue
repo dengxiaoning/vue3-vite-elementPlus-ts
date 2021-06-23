@@ -1,7 +1,8 @@
+
 <template>
   <div>
-    <HelloWorld msg="build 时候，组件必传参数" />
-      <el-button @click="addCount">count is: {{ count }}</el-button>
+    <HelloWorld msg="build 时候，组件必传参数, 父组件传子组件" />
+    <el-button @click="addCount">count is: {{ count }}</el-button>
   </div>
 </template>
 <script lang="ts">
@@ -16,7 +17,7 @@
     },
     setup() {
       const store = useStore()
-
+      console.log(store,"store--------")
       const count: any = computed({
         get() {
           return store.state.app.count
