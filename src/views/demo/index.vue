@@ -23,7 +23,6 @@ export default {
   setup(){
     const {x,y} = useMousePosition()
     const childData=ref('')
-    console.log('loadsh')
     const handleSignIn = ()=>{
       signIn().then((res)=>{
         console.log(res);

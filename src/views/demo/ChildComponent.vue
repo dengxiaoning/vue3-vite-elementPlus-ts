@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <el-input v-model="count" placeholder="请输入内容" size="medium"></el-input>
+        <el-input v-model="count" placeholder="请输入内容" @input="valChange" size="medium"></el-input>
     </div>
 </template>
 
@@ -30,6 +30,7 @@ export default defineComponent({
         })
          // 数据双向绑定
         const valChange =(e:string)=> {
+            console.log(e)
             emit('update:childData', e)
         }    
         return {
