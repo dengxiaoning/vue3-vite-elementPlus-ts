@@ -30,7 +30,6 @@ export default defineComponent({
         })
          // 数据双向绑定
         const valChange =(e:string)=> {
-            console.log(e)
             emit('update:childData', e)
         }    
         return {

@@ -16,6 +16,7 @@ import {signIn} from '@/api/login/index'
 import { defineComponent,toRefs,ref } from "vue"
 import useMousePosition from "hooks/useMousePosition"
 import ChildComponent from "./ChildComponent.vue"
+import * as _ from 'lodash'
 export default {
   components:{
       ChildComponent
@@ -23,13 +24,13 @@ export default {
   setup(){
     const {x,y} = useMousePosition()
     const childData=ref('')
-    const handleSignIn = ()=>{
+    const handleSignIn = _.debounce(()=>{
       signIn().then((res)=>{
         console.log(res);
       }).catch((err)=>{
         console.log(err);
       })
-    }
+    },500,{leading:true,trailing:false}) 
     return {
       handleSignIn,
       childData,
