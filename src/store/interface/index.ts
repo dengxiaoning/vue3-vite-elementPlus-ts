@@ -1,6 +1,10 @@
 import { defineComponent } from 'vue'
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
-
+/**
+ * typescript 
+ * 官网 https://www.tslang.cn/docs/home.html 
+ * 博客 https://blog.csdn.net/qq_40280582/article/details/112444461
+ */
 type Component<T extends any = any> =
   | ReturnType<typeof defineComponent>
   | (() => Promise<typeof import('*.vue')>)
@@ -14,8 +18,9 @@ interface RouteMeta {
   isHide: boolean
   isKeepAlive: boolean
   title: string
-  index: string | number
+  index?: string | number
   roles?: string[]
+  noCache?: boolean
 }
 
 // @ts-ignore
@@ -27,7 +32,8 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   children?: AppRouteRecordRaw[]
   props?: Recordable
   fullPath?: string
-  query?: Partial<Recordable>  | undefined
+  query?: Partial<Recordable> | undefined
+  redirect?:string
 }
 
 export interface Menu {
@@ -40,7 +46,7 @@ export interface Menu {
   query?:  Partial<Recordable>  | undefined
 
   meta: Partial<RouteMeta>
-
+  component?: Component | string
   children?: Menu[]
 }
 
@@ -65,6 +71,18 @@ export interface App {
   count: number
 }
 
+export interface Userinfo{
+  name: string,
+  avatar: string,
+  roles: Array<any>,
+  permissions: Array<any>,
+}
+
+export interface permissionListState {
+  routeList:Array<any>,
+  addRoutes: Array<any>,
+}
+
 export interface RoutesListState {
   routesList: Array<AppRouteRecordRaw>
 }
@@ -78,7 +96,9 @@ export interface RootStateTypes {
   themeConfig: ThemeConfigState
   app: App
   routesList: RoutesListState
-  tagsViewRoutes: TagsViewRoutesState
+  tagsViewRoutes: TagsViewRoutesState,
+  user: Userinfo,
+  permission:permissionListState
 }
 
 export type AppRouteModule = AppRouteRecordRaw

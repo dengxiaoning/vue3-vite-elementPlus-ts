@@ -16,6 +16,12 @@ const app: Module<App, RootStateTypes> = {
     increment(state: App) {
       state.count++
     }
+  },
+  actions: {
+    async changeCount({ commit }, num: App) {
+      console.log('app.ts receive num is :',num)
+      commit('increment', num);
+    }
   }
 }
 

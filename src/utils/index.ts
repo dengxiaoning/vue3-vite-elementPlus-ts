@@ -14,6 +14,9 @@ export class Utils {
     return str
   }
 
+  public static isExternal(path:string) {
+    return /^(https?:|mailto:|tel:)/.test(path)
+  }
   /**
    * 截取URL参数
    * @param {string} url

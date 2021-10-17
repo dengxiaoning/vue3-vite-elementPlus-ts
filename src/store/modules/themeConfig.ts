@@ -6,7 +6,7 @@ const themeConfigModule: Module<ThemeConfigState, RootStateTypes> = {
 	state: {
 		/*  --------- 界面设置  --------- */
 		// 网站主标题（菜单导航、浏览器当前网页标题）
-		globalTitle: 'Vue3-ElementPlus-Vite2',
+		globalTitle: '创数大数据',
 		// 是否开启侧边栏 Logo
 		isShowLogo: true,
 		// 是否开启菜单水平折叠效果

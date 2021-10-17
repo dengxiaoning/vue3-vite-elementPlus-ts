@@ -8,39 +8,82 @@ const routerHistory = createWebHistory()
 
 const Layout = () => import('@/layout/index.vue')
 
+export const constantRoutes = [
+  {
+    path: '/',
+    name:'root',
+    component: Layout,
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        name:'home',
+        component: ()=>import('views/home/index.vue'),
+        meta: {
+          auth: ['admin', 'test'],
+          icon: 'iconfont el-icon-menu',
+          isAffix: true,
+          isHide: false,
+          isKeepAlive: true,
+          title: '首页',
+          index: '1'
+        },
+      },
+      {
+        path: '/demo',
+        name:'demo',
+        component: () => import('views/system/user/index.vue'),
+        meta: {
+          auth: ['admin', 'test'],
+          icon: 'iconfont el-icon-s-grid',
+          isAffix: false,
+          isHide: false,
+          isKeepAlive: true,
+          title: 'demo',
+          index: '2'
+        },
+      },
+      {
+        path: '/icon',
+        name:'icon',
+        component: () => import('views/icon/index.vue'),
+        meta: {
+          auth: ['admin', 'test'],
+          icon: 'iconfont el-icon-s-grid',
+          isAffix: false,
+          isHide: false,
+          isKeepAlive: true,
+          title: 'icon',
+          index: '3'
+        },
+      },
+      {
+        path: '/elementIcon',
+        name:'elementIcon',
+        component: () => import('views/elementIcon/index.vue'),
+        meta: {
+          auth: ['admin', 'test'],
+          icon: 'iconfont el-icon-s-grid',
+          isAffix: false,
+          isHide: false,
+          isKeepAlive: true,
+          title: 'elementIcon',
+          index: '4'
+        },
+      }
+      
+    ]
+  },
+  {
+    path: '/login',
+    name:'login',
+    component: () => import('@/views/login/login.vue')
+  }
+]
+
 const router = createRouter({
   history: routerHistory,
-  routes: [
-    {
-      path: '/',
-      component: Layout,
-      redirect:'/home',
-      children: [
-        {
-          path: '/home',
-          name:'home',
-          component: ()=>import('views/home/index.vue'),
-
-        },
-        {
-          path: '/demo',
-          name:'demo',
-          component: ()=>import('views/demo/index.vue'),
-        },
-        {
-          path: '/icon',
-          name:'icon',
-          component: ()=>import('views/icon/index.vue'),
-        },
-        {
-          path: '/elementIcon',
-          name:'elementIcon',
-          component: ()=>import('views/elementIcon/index.vue'),
-        }
-        
-      ]
-    }
-  ]
+  routes: constantRoutes
 })
 
 // 删除/重置路由

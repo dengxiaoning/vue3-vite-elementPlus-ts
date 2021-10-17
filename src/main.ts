@@ -9,7 +9,8 @@ import './styles/index.scss'
 
 import mitt from 'mitt';
 
-import App from './App.vue'
+import App from './App'
+import './permission' // permission control
 
 const app = createApp(App)
 

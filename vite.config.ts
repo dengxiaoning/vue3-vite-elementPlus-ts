@@ -1,5 +1,6 @@
 import { defineConfig, UserConfigExport, ConfigEnv, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'path'
 
 import { configSvgIconsPlugin } from './src/plugins/configSvgIconsPlugin'
@@ -35,6 +36,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     base: './',
     plugins: [
       vue(),
+      vueJsx(),
       configSvgIconsPlugin(isBuild), // svg 处理
       configStyleImportPlugin(isBuild), // element-plus 按需引入
       configHtmlPlugin(viteEnv, isBuild), //  EJS 标签处理
@@ -55,6 +57,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         styles: resolve('src/styles'),
         hooks: resolve('src/hooks'),
       }
+    },
+    optimizeDeps: {
+      include: ["element-plus/lib/locale/lang/zh-cn"]
     },
     server: {
       //服务器主机名

@@ -31,3 +31,7 @@ declare module '*.vue' {
   const Component: ReturnType<typeof defineComponent>;
   export default Component;
 }
+
+declare module 'path-browserify'
+
+declare module 'nprogress'

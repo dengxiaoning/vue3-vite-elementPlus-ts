@@ -6,37 +6,44 @@
   </div>
 </template>
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
-  import { useStore } from 'store/index'
-  import HelloWorld from '@/components/HelloWorld.vue'
+import { computed, defineComponent } from 'vue'
+import { useStore } from 'store/index'
+import { useRoute } from 'vue-router'
+import HelloWorld from '@/components/HelloWorld.vue'
 
-  export default defineComponent({
-    name: 'App',
-    components: {
-      HelloWorld
-    },
-    setup() {
-      const store = useStore()
-      console.log(store,"store--------")
-      const count: any = computed({
-        get() {
-          return store.state.app.count
-        },
-        set(value) {
-          store.commit('increment', value)
-        }
-      })
-
-      function addCount() {
-        count.value += 1
+export default defineComponent({
+  name: 'App',
+  components: {
+    HelloWorld
+  },
+  setup() {
+    const store = useStore()
+    console.log(store, 'store--------')
+    const count: any = computed({
+      get() {
+        return store.state.app.count
+      },
+      set(value) {
+        // store.commit('increment', value)
+        store.dispatch('changeCount', value)
       }
+    })
 
-      return {
-        count,
-        addCount
-      }
+    function addCount() {
+      count.value += 1
     }
-  })
+
+    //router是全局路由对象，route= userRoute()是当前路由对象
+    let route = useRoute()
+    let num = route.query.num
+    //let num = route.params.num;
+    console.log('it receive params is :', num)
+    return {
+      count,
+      addCount
+    }
+  }
+})
 </script>
 
 <style></style>

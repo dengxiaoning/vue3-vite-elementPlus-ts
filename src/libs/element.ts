@@ -90,8 +90,7 @@ import {
 import locale from 'element-plus/lib/locale'
 import lang from 'element-plus/lib/locale/lang/zh-cn'
 
-// 设置语言
-locale.use(lang)
+
 
 const components = [
   ElAlert,
@@ -185,7 +184,8 @@ const plugins = [
  import ElementPlus from'element-plus'
 
 export function setupElementPlus(app: App<Element>): void {
-
+// 设置语言
+// locale.use(lang)
   // components.forEach((component: any) => {
   //   app.component(component.name, component)
   // })

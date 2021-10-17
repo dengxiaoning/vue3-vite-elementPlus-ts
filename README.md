@@ -1,23 +1,9 @@
 
-
-<p align="center">
-    <a href="https://npmjs.com/package/node"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatility"></a>
-    <a href="https://npmjs.com/package/npm"><img src="https://img.shields.io/badge/npm-v6.13.4-blue" alt="npm package"></a>
-    <a href="https://npmjs.com/package/vue"><img src="https://img.shields.io/badge/vue-v3.0.5-success" alt="vue package"></a>
-    <a href="https://npmjs.com/package/vite"><img src="https://img.shields.io/badge/vite-v2.2.1-blue" alt="vite package"></a>
-    <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer"></a>
-</p>
-
-
+## 创数大数据平台(cs-data-platform)
 
 ## 简介
->使用最新的`vue3`,`vite2`,`typescript`等主流技术搭建的一个供学习参考的模版工程。
-
-## 包含
-- **技术栈**：使用 `vue3`,`vite`,`typescript`等前沿技术开发
-- **ajax**：二次封装`axios`，统一管理接口  [axios中文文档 (javasoho.com)](https://javasoho.com/axios/index.html)
-- **UI 框架**：`element-plus`主题样式   [Element Plus - The world's most popular Vue 3 UI framework (gitee.io)](https://element-plus.gitee.io/#/zh-CN/component/installation)
-- **工具**：lodash ([Lodash 简介 | Lodash 中文文档 | Lodash 中文网 (lodashjs.com)](https://www.lodashjs.com/)) 常用的指令，过滤器，`storage`存储，工具函数   
+创数大数据平台：集成数据管理，文档管理，项目管理等功能模块
+涉及模块，菜单，操作功能权限管理分配
 
 ## 目录结构
 ```md
