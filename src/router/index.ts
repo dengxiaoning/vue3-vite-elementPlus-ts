@@ -32,7 +32,7 @@ export const constantRoutes = [
       {
         path: '/demo',
         name:'demo',
-        component: () => import('views/system/user/index.vue'),
+        component: () => import('views/demo/index.vue'),
         meta: {
           auth: ['admin', 'test'],
           icon: 'iconfont el-icon-s-grid',
