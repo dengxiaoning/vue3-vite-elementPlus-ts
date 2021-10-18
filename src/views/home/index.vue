@@ -18,7 +18,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
-    console.log(store, 'store--------')
+
     const count: any = computed({
       get() {
         return store.state.app.count

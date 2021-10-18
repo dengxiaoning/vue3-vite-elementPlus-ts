@@ -53,7 +53,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         apis: resolve('src/apis'),
         views: resolve('src/views'),
         store: resolve('src/store'),
-        routes: resolve('src/routes'),
+        router: resolve('src/router'),
         styles: resolve('src/styles'),
         hooks: resolve('src/hooks'),
       }

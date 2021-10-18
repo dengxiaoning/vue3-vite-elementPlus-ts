@@ -26,15 +26,14 @@
         </transition-group>
       </el-breadcrumb>
     </div>
-    <div style="flex:6;height:100%;display: flex;align-items: center;justify-content: flex-end;padding-right: 40px;">
-      <el-image style="width: 40px; height: 80%;border-radius: 50%;margin-right: 15px;cursor: pointer"
+    <div class="layout-navbars-breadcrumb-right">
+      <el-image style="width: 35px; height: 35px;border-radius: 50%;cursor: pointer"
                 src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
                 fit="cover">
       </el-image>
       <el-dropdown>
         <span class="el-dropdown-link"
-              style="cursor: pointer">
-          下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+              style="cursor: pointer"><i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -97,8 +96,13 @@ export default {
     const getBreadcrumbList = (arr: AppRouteRecordRaw[]) => {
       arr.map((item: AppRouteRecordRaw) => {
         state.routeSplit.map((v: any, k: number, arrs: any) => {
-          if (state.routeSplitFirst === item.path) {
-            state.routeSplitFirst += `/${arrs[state.routeSplitIndex]}`
+          // 前面或许带斜杠
+          if (
+            state.routeSplitFirst === item.path ||
+            '/' + state.routeSplitFirst === item.path
+          ) {
+            // 继续寻找下一项
+            state.routeSplitFirst = arrs[state.routeSplitIndex]
             state.breadcrumbList.push(item)
             state.routeSplitIndex++
             if (item.children) getBreadcrumbList(item.children)
@@ -108,13 +112,13 @@ export default {
     }
     // 当前路由字符串切割成数组，并删除第一项空内容
     const initRouteSplit = (path: string) => {
+      const permissionRouteList = store.state.permission.routeList
       if (!store.state.themeConfig.isBreadcrumb) return false
-      state.breadcrumbList = [store.state.routesList.routesList[0]]
       state.routeSplit = path.split('/')
       state.routeSplit.shift()
-      state.routeSplitFirst = `/${state.routeSplit[0]}`
+      state.routeSplitFirst = state.routeSplit[0]
       state.routeSplitIndex = 1
-      getBreadcrumbList(store.state.routesList.routesList)
+      getBreadcrumbList(permissionRouteList)
     }
     // 页面加载时
     onMounted(() => {
@@ -122,10 +126,12 @@ export default {
     })
     // 路由更新时
     onBeforeRouteUpdate((to) => {
+      state.breadcrumbList = []
       initRouteSplit(to.path)
     })
 
     onBeforeRouteLeave((to: any) => {
+      state.breadcrumbList = []
       initRouteSplit(to.path)
     })
     return {
@@ -158,6 +164,14 @@ export default {
   .layout-navbars-breadcrumb-iconfont {
     font-size: 14px;
     margin-right: 5px;
+  }
+  .layout-navbars-breadcrumb-right {
+    flex: 6;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
   }
   ::v-deep(.el-breadcrumb__separator) {
     opacity: 0.7;

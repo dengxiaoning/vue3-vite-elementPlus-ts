@@ -1,6 +1,6 @@
 import {
   constantRoutes
-} from '@/router/index'
+} from 'router/index'
 import { Module } from 'vuex';
 import { permissionListState, RootStateTypes } from 'store/interface/index';
 
@@ -12,7 +12,7 @@ const permissionModule : Module<permissionListState, RootStateTypes>= {
   mutations: {
     SET_ROUTES: (state:any, routes:any) => {
       state.addRoutes = routes
-      let resRoutelist:any[] = constantRoutes.map(e => e.name !== 'root')
+      let resRoutelist:any[] = constantRoutes.filter(e => e.name !== 'root')
       let getRootList = constantRoutes.find(e => e.name === 'root');
       if (getRootList) {
         resRoutelist= resRoutelist.concat(getRootList.children)
@@ -27,48 +27,17 @@ const permissionModule : Module<permissionListState, RootStateTypes>= {
       commit
     }:any) {
       return new Promise((resolve:any) => {
-        var testData = {
-          "msg": "操作成功",
-          "code": 200,
-          "data": [
-            {
-              "name": "system",
-              "path": "/system",
-              "component": "Layout",
-              "meta": {
-                "auth": ['admin', 'test'],
-                "title": "文档管理",
-                icon: 'iconfont el-icon-menu',
-                isAffix: false,
-                isHide: false,
-                isKeepAlive: true,
-              },
-              "children": [{
-                "name": "user",
-                "path": "user",
-                "component": "system/user/index",
-                "meta": {
-                  "auth": ['admin', 'test'],
-                  "title": "基础信息管理",
-                  icon: 'iconfont el-icon-menu',
-                  isAffix: false,
-                  isHide: false,
-                  isKeepAlive: true,
-                }
-              }]
-            }
-          ]
-        
-        }
-        // const accessedRoutes = filterAsyncRouter(testData.data)
-        const accessedRoutes = testData.data
-        // accessedRoutes.push({
-        //   path: '/:catchAll(.*)',
-        //   redirect: '/404',
-        //   hidden: true
-        // })
-        commit('SET_ROUTES', accessedRoutes)
-        resolve(accessedRoutes)
+
+        fetch("testMenu.json").then(res => {
+					return res.json();
+				}).then(res => {
+					if (typeof res === 'string') {
+						res = JSON.parse(res)
+					}
+          const accessedRoutes = res;
+          commit('SET_ROUTES', accessedRoutes)
+           resolve(accessedRoutes)
+				})
 
         // 向后端请求路由数据
         // getRouters().then(res => {

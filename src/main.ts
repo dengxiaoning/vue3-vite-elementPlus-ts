@@ -6,11 +6,10 @@ import { setupElementPlus } from './libs/element' // element UI
 import { setupGlobalCom } from './components/index'
 
 import './styles/index.scss'
-
 import mitt from 'mitt';
-
 import App from './App'
 import './permission' // permission control
+import 'virtual:svg-icons-register';
 
 const app = createApp(App)
 

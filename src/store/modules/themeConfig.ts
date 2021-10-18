@@ -28,7 +28,7 @@ const themeConfigModule: Module<ThemeConfigState, RootStateTypes> = {
 		// 是否开启 TagsView 缓存
 		isCacheTagsView: false,
 		// 是否开启菜单手风琴效果
-		isUniqueOpened: false,
+		isUniqueOpened: true,
 		// 是否开启 Tagsview 图标
 		isTagsviewIcon: false,
 	},

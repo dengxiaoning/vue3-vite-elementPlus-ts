@@ -4,7 +4,8 @@
             v-if="clientWidth > 1000">
     <Logo v-if="setShowLogo" />
     <el-scrollbar class="flex-auto"
-                  ref="layoutAsideScrollbarRef">
+                  ref="layoutAsideScrollbarRef"
+                  style="background:rgb(48, 65, 86);">
       <SubBar :menuList="menuList"
               :class="setCollapseWidth" />
     </el-scrollbar>

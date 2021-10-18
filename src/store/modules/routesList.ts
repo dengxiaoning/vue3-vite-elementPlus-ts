@@ -58,32 +58,6 @@ const routesListModule: Module<RoutesListState, RootStateTypes> = {
         },
         name: 'elementIcon',
         path: '/elementIcon'
-      },
-      {
-        "name": "system",
-        "path": "/system",
-        "component": "Layout",
-        "meta": {
-          "auth": ['admin', 'test'],
-          "title": "水利工程基础管理",
-          icon: 'iconfont el-icon-menu',
-          isAffix: false,
-          isHide: false,
-          isKeepAlive: true,
-        },
-        "children": [{
-          "name": "user",
-          "path": "user",
-          "component": "views/system/user/index",
-          "meta": {
-            "auth": ['admin', 'test'],
-            "title": "基础信息管理",
-            icon: 'iconfont el-icon-menu',
-            isAffix: false,
-            isHide: false,
-            isKeepAlive: true,
-          }
-        }]
       }
     ],
 	},

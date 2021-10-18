@@ -4,7 +4,9 @@
                 :key="val.path"
                 v-if="val.children && val.children.length > 0">
       <template #title>
-        <i :class="val.meta.icon"></i>
+        <!-- <i :class="val.meta.icon"></i> -->
+
+        <CIcon icon-class="eos-icons:cluster-management-outlined" />
         <span>{{ val.meta.title }}</span>
       </template>
       <sub-item :chil="val.children"
