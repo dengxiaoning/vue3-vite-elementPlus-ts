@@ -98,7 +98,7 @@ export default {
 
     // 存储 tagsViewList 到浏览器临时缓存中，页面刷新时，保留记录
     const addBrowserSetSession = (tagsViewList: Array<Menu>) => {
-      setSession(sessionkey, tagsViewList)
+      // setSession(sessionkey, tagsViewList)
     }
 
     // 获取 vuex 中的 tagsViewRoutes 列表

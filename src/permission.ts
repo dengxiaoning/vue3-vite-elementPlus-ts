@@ -39,9 +39,11 @@ router.beforeEach((to:any, from:any, next:any) => {
           const roles = res.roles
           store.dispatch('GenerateRoutes', {
             roles
-          }).then((accessRoutes:AppRouteRecordRaw[]) => {
+          }).then((accessRoutes: AppRouteRecordRaw[]) => {
+            const obtainModules = getMoulesByRoute();
             // 根据roles权限生成可访问的路由表
-            custAddRoutes(accessRoutes)
+            custAddRoutes(accessRoutes,'',obtainModules)
+            // verifyUserRouteList(accessRoutes);
             loading.close(); // 关闭loading
             next({
               ...to,
@@ -75,7 +77,7 @@ router.beforeEach((to:any, from:any, next:any) => {
  * import(`./views/${componentPath}.vue`)✔
  * https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
  */
-const custAddRoutes = (routes:AppRouteRecordRaw[], parentName:string = " ") :void => {
+const custAddRoutes = (routes:AppRouteRecordRaw[], parentName:string = " ",obtainModules:Function) :void => {
   routes.forEach((item:any) => {
     if (item.path && item.component) {
       const componentString = item.component.replace(/^\/+/, ""), // 过滤字符串前面所有 '/' 字符
@@ -86,20 +88,66 @@ const custAddRoutes = (routes:AppRouteRecordRaw[], parentName:string = " ") :voi
         path: item.path,
         redirect: item.redirect,
         name: item.name, 
-        component: item.component === 'Layout' ? Layout : () => import(`./views/${componentPath}.vue`) ,
+        // component: item.component === 'Layout' ? Layout : () => import(`./views/${componentPath}.vue`) ,
+        component: item.component === 'Layout' ? Layout : obtainModules(`./views/${componentPath}.vue`) ,
         meta: item.meta 
       }
 
       parentName ? router.addRoute(parentName, eachRoute) : router.addRoute(eachRoute);
 
       if (item.children && item.children.length) {
-        custAddRoutes(item.children, item.name);
+        custAddRoutes(item.children, item.name,obtainModules);
       }
     }
   })
 
 };
 
+/**
+ * 根据component 获取真实的模块
+ * @returns 
+ */
+function getMoulesByRoute():Function {
+  // 把所有的数据读出来
+  const modulesGlob = import.meta.globEager("./views/**/**.vue");
+  return (componentStr: string):any => {
+    let finalComp = null;
+    Object.keys(modulesGlob).map((key) => {
+      if (key === componentStr) {
+        finalComp =modulesGlob[key].default;
+        
+      }
+    });
+    return finalComp;
+  }
+}
+
+/**
+ * 使用glob加载views下的所有vue文件
+ * 根据list对比用户是否拥有该页面权限
+ * 获取到对应fileurl和list 中对应的component 进行对比，如果相等就证明这是要找的路由文件
+ * @param list 
+ */
+function verifyUserRouteList(list: AppRouteRecordRaw[]) {
+  debugger;
+  const modules = import.meta.globEager("./views/**/**.vue");
+  for (const path in modules) {
+    console.log(path)
+    // modules[path]().then((mod) => {
+    //   const file = mod.default;
+    //   // 拿到对应的module 路径，取views后面的路径，去ruleRoleList中找寻对应的路径
+    //   const _file = file.__file;
+    //   console.log('_file is :', _file);
+    //   // if (list.map((a) => a.name).includes(file.name)) {
+    //   //   router.addRoute({
+    //   //     path: "/" + file.name,
+    //   //     name: file.name,
+    //   //     component: file,
+    //   //   });
+    //   // }
+    // });
+  }
+}
 
 router.afterEach(() => {
   NProgress.done()
