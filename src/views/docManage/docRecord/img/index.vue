@@ -1,10 +1,10 @@
 <template>
-  <div>document manage -- manage --- img</div>
+  <div>document manage -- manage --- imgCom</div>
 </template>
 
 <script>
 export default {
-  name: 'img',
+  name: 'imgCom',
   setup() {
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login_logo">
-      <img src="../../assets/image/visual/logo.png"
+      <img src="@/assets/image/visual/logo.png"
            alt="">
     </div>
     <h1>水利工程数字孪生协同管理平台</h1>
@@ -25,6 +25,7 @@
 // 定义一个组件
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
+
 export default defineComponent({
   name: 'login',
   props: {

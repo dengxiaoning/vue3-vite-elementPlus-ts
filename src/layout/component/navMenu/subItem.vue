@@ -1,12 +1,11 @@
 <template>
-  <template v-for="val in chils">
+  <template v-for="(val,index) in chils"
+            :key="index">
     <el-submenu :index="resolvePath(val.path)"
                 :key="val.path"
                 v-if="val.children && val.children.length > 0">
       <template #title>
-        <!-- <i :class="val.meta.icon"></i> -->
-
-        <CIcon icon-class="eos-icons:cluster-management-outlined" />
+        <CIcon :icon-class="val.meta.icon" />
         <span>{{ val.meta.title }}</span>
       </template>
       <sub-item :chil="val.children"
@@ -16,13 +15,13 @@
                   :key="val.path"
                   v-else>
       <template v-if="!val.meta.isLink">
-        <i :class="val.meta.icon ? val.meta.icon : ''"></i>
+        <CIcon :icon-class="val.meta.icon ? val.meta.icon : ''" />
         <span>{{ val.meta.title }}</span>
       </template>
       <template v-else>
         <a :href="val.meta.isLink"
            target="_blank">
-          <i :class="val.meta.icon ? val.meta.icon : ''"></i>
+          <CIcon :icon-class="val.meta.icon ? val.meta.icon : ''" />
           {{ val.meta.title }}
         </a>
       </template>

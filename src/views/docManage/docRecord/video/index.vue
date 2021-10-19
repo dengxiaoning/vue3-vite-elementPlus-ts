@@ -1,10 +1,10 @@
 <template>
-  <div>document manage -- manage --- video</div>
+  <div>document manage -- manage --- videoCon</div>
 </template>
 
 <script>
 export default {
-  name: 'video',
+  name: 'videoCon',
   setup() {
   },
 }

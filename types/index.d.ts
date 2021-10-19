@@ -35,3 +35,4 @@ declare module '*.vue' {
 declare module 'path-browserify'
 declare module 'nprogress'
 declare module '@iconify/vue'
+declare module 'element-plus'

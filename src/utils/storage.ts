@@ -1,6 +1,9 @@
 // 设置永久缓存
 export function setLocal(key: string, val: any) {
-  window.localStorage.setItem(key, JSON.stringify(val))
+  if (val) {
+    window.localStorage.setItem(key, JSON.stringify(val))
+  }
+
 }
 
 // 获取永久缓存
@@ -9,10 +12,15 @@ export function getLocal(key: string) {
   return JSON.parse(json)
 }
 
+
 // 2. sessionStorage
 // 设置临时缓存
 export function setSession(key: string, val: any) {
-	window.sessionStorage.setItem(key, JSON.stringify(val));
+  console.log(val)
+  if (val) {
+    window.sessionStorage.setItem(key, JSON.stringify(val));
+  }
+
 }
 // 获取临时缓存
 export function getSession(key: string) {

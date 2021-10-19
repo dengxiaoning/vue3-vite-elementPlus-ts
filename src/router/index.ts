@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import type { App } from 'vue'
 
-const routerHistory = createWebHistory()
+const routerHistory = createWebHashHistory()
 // createWebHashHistory hash 路由
 // createWebHistory history 路由
 // createMemoryHistory 带缓存 history 路由
@@ -21,7 +21,7 @@ export const constantRoutes = [
         component: ()=>import('views/home/index.vue'),
         meta: {
           auth: ['admin', 'test'],
-          icon: 'iconfont el-icon-menu',
+          icon: 'carbon:rule-test',
           isAffix: true,
           isHide: false,
           isKeepAlive: true,
@@ -35,7 +35,7 @@ export const constantRoutes = [
         component: () => import('views/demo/index.vue'),
         meta: {
           auth: ['admin', 'test'],
-          icon: 'iconfont el-icon-s-grid',
+          icon: 'carbon:rule-test',
           isAffix: false,
           isHide: false,
           isKeepAlive: true,
@@ -49,7 +49,7 @@ export const constantRoutes = [
         component: () => import('views/icon/index.vue'),
         meta: {
           auth: ['admin', 'test'],
-          icon: 'iconfont el-icon-s-grid',
+          icon: 'carbon:rule-test',
           isAffix: false,
           isHide: false,
           isKeepAlive: true,
@@ -63,7 +63,7 @@ export const constantRoutes = [
         component: () => import('views/elementIcon/index.vue'),
         meta: {
           auth: ['admin', 'test'],
-          icon: 'iconfont el-icon-s-grid',
+          icon: 'carbon:rule-test',
           isAffix: false,
           isHide: false,
           isKeepAlive: true,

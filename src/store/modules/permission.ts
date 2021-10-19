@@ -1,6 +1,6 @@
 import {
   constantRoutes
-} from 'router/index'
+} from '@/router/index'
 import { Module } from 'vuex';
 import { permissionListState, RootStateTypes } from 'store/interface/index';
 
@@ -27,17 +27,23 @@ const permissionModule : Module<permissionListState, RootStateTypes>= {
       commit
     }:any) {
       return new Promise((resolve:any) => {
-
-        fetch("testMenu.json").then(res => {
-					return res.json();
-				}).then(res => {
-					if (typeof res === 'string') {
-						res = JSON.parse(res)
-					}
-          const accessedRoutes = res;
+        const modulesObtainJson = import.meta.glob('../../../public/*.json')
+        modulesObtainJson['../../../public/testMenu.json']().then((mod) => {
+          const accessedRoutes = mod.default;
           commit('SET_ROUTES', accessedRoutes)
            resolve(accessedRoutes)
-				})
+        })
+        
+        // fetch("testMenu.json").then(res => {
+				// 	return res.json();
+				// }).then(res => {
+				// 	if (typeof res === 'string') {
+				// 		res = JSON.parse(res)
+				// 	}
+        //   const accessedRoutes = res;
+        //   commit('SET_ROUTES', accessedRoutes)
+        //    resolve(accessedRoutes)
+				// })
 
         // 向后端请求路由数据
         // getRouters().then(res => {

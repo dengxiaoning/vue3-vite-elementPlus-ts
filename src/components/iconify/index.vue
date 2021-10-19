@@ -1,14 +1,14 @@
 <template>
   <Icon :icon="iconClass"
-        :class="custClass"
+        :class="custClassOnIcon"
         :height="inconHeight"
         :width="iconWidth"
         :color="iconColor" />
 </template>
 
 <script lang="ts">
-import { Icon } from '@iconify/vue'
 // reference https://iconify.design/
+import { Icon } from '@iconify/vue'
 import { defineComponent, computed } from 'vue'
 
 interface Props {
@@ -46,7 +46,14 @@ export default defineComponent({
     Icon
   },
   setup(props: Props) {
-    return {}
+    const custClassOnIcon = computed((): string => {
+      if (props.custClass) {
+        return 'iconfont' + props.custClass
+      } else {
+        return 'iconfont'
+      }
+    })
+    return { custClassOnIcon }
   }
 })
 </script>

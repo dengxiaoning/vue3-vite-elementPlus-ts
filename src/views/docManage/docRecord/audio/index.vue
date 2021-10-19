@@ -1,10 +1,10 @@
 <template>
-  <div>document manage -- another</div>
+  <div>document manage -- manage --- audioCom</div>
 </template>
 
 <script>
 export default {
-  name: 'another',
+  name: 'audioCom',
   setup() {
   },
 }

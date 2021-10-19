@@ -16,7 +16,7 @@ NProgress.configure({
 
 const whiteList = ['/auth-redirect', '/bind', '/register']
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to:any, from:any, next:any) => {
   const userislogin = sessionStorage.getItem('userInfo');
   NProgress.start()
   /* has token*/
@@ -34,12 +34,12 @@ router.beforeEach((to, from, next) => {
     if (store.state.user.roles.length === 0) {
       const loading = ElLoading.service();
       // 判断当前用户是否已拉取完user_info信息
-      store.dispatch('GetInfo').then(res => {
+      store.dispatch('GetInfo').then((res:any) => {
           // 拉取user_info
           const roles = res.roles
           store.dispatch('GenerateRoutes', {
             roles
-          }).then(accessRoutes => {
+          }).then((accessRoutes:AppRouteRecordRaw[]) => {
             // 根据roles权限生成可访问的路由表
             custAddRoutes(accessRoutes)
             loading.close(); // 关闭loading
@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
             }) // hack方法 确保addRoutes已完成
           })
         })
-        .catch(err => {
+        .catch((err:any) => {
           store.dispatch('FedLogOut').then(() => {
             ElMessage.error(err)
             next({

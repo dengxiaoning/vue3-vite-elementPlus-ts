@@ -5,12 +5,13 @@
            :default-active="defaultActive"
            :unique-opened="getThemeConfig.isUniqueOpened"
            :collapse-transition="false">
-    <template v-for="val in menuLists">
+    <template v-for="(val,index) in menuLists"
+              :key="index">
       <el-submenu :index="val.path"
                   v-if="val.children && val.children.length > 0"
                   :key="val.path">
         <template #title>
-          <i :class="val.meta.icon ? val.meta.icon : ''"></i>
+          <CIcon :icon-class="val.meta.icon ? val.meta.icon : ''" />
           <span>{{ val.meta.title }}</span>
         </template>
         <SubItem :chil="val.children"
@@ -20,7 +21,7 @@
       <el-menu-item :index="val.path"
                     :key="val.path"
                     v-else>
-        <i :class="val.meta.icon ? val.meta.icon : ''"></i>
+        <CIcon :icon-class="val.meta.icon ? val.meta.icon : ''" />
         <template #title
                   v-if="!val.meta.isLink">
           <span>{{ val.meta.title }}</span>
