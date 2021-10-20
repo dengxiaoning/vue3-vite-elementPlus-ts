@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "cesium":"1.84.0",
+    "cesium": "1.84.0",
     "element-plus": "^1.0.2-beta.41",
     "flatted": "^3.2.2",
     "lodash": "^4.17.21",
@@ -39,6 +39,7 @@
     "vite-plugin-mock": "^2.5.0",
     "vite-plugin-style-import": "^0.10.0",
     "vite-plugin-svg-icons": "^1.0.4",
-    "vue-tsc": "^0.0.24"
+    "vue-tsc": "^0.0.24",
+    "vite-plugin-cesium": "^1.2.9"
   }
 }
