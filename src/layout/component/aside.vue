@@ -120,12 +120,15 @@ export default {
     }
 
     // 监听 themeConfig 配置文件的变化，更新菜单 el-scrollbar 的高度
-    watch(store.state.themeConfig, (val) => {
-      if (val.isShowLogoChange !== val.isShowLogo) {
-        if (!proxy.$refs.layoutAsideScrollbarRef) return false
-        proxy.$refs.layoutAsideScrollbarRef.update()
+    watch(
+      () => store.state.themeConfig,
+      (val) => {
+        if (val.isShowLogoChange !== val.isShowLogo) {
+          if (!proxy.$refs.layoutAsideScrollbarRef) return false
+          proxy.$refs.layoutAsideScrollbarRef.update()
+        }
       }
-    })
+    )
 
     // 页面加载前
     onBeforeMount(() => {

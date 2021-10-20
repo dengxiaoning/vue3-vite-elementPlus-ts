@@ -1,7 +1,8 @@
+import {parse as jsonparse, stringify as jsonstringify} from 'flatted';
 // 设置永久缓存
 export function setLocal(key: string, val: any) {
   if (val) {
-    window.localStorage.setItem(key, JSON.stringify(val))
+    window.localStorage.setItem(key, jsonstringify(val))
   }
 
 }
@@ -9,23 +10,21 @@ export function setLocal(key: string, val: any) {
 // 获取永久缓存
 export function getLocal(key: string) {
   let json: any = window.localStorage.getItem(key)
-  return JSON.parse(json)
+  return json ? jsonparse(json) : null;
 }
-
 
 // 2. sessionStorage
 // 设置临时缓存
 export function setSession(key: string, val: any) {
-  console.log(val)
   if (val) {
-    window.sessionStorage.setItem(key, JSON.stringify(val));
+    window.sessionStorage.setItem(key,jsonstringify(val));
   }
 
 }
 // 获取临时缓存
 export function getSession(key: string) {
 	let json: any = window.sessionStorage.getItem(key);
-	return JSON.parse(json);
+	return json?jsonparse(json):null;
 }
 // 移除临时缓存
 export function removeSession(key: string) {

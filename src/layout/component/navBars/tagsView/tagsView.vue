@@ -61,7 +61,7 @@ import {
 } from 'vue-router'
 import type { Menu } from 'store/interface/index'
 import { useStore } from 'store/index'
-import { setSession, removeSession } from '@/utils/storage'
+import { setSession, removeSession } from '@/utils/localCache'
 
 interface State {
   routePath: string
@@ -90,7 +90,7 @@ export default {
       tagsViewRoutesList: []
     })
 
-    const sessionkey: string = 'tagsViewSessionkey'
+    const sessionkey: string = store.state.tagsViewRoutes.tagsSession
     // 获取布局配置信息
     const getThemeConfig = computed(() => {
       return store.state.themeConfig
@@ -98,16 +98,23 @@ export default {
 
     // 存储 tagsViewList 到浏览器临时缓存中，页面刷新时，保留记录
     const addBrowserSetSession = (tagsViewList: Array<Menu>) => {
-      // setSession(sessionkey, tagsViewList)
+      setSession(sessionkey, tagsViewList)
     }
 
-    // 获取 vuex 中的 tagsViewRoutes 列表
-    const getTagsViewRoutes = () => {
+    /**
+     * 获取 vuex 中的 tagsViewRoutes 列表
+     * fromOnmount 来自onmount
+     */
+    const getTagsViewRoutes = (fromOnmount?: boolean) => {
       state.routePath = route.path
       state.tagsViewList = []
       if (!store.state.themeConfig.isCacheTagsView) removeSession(sessionkey)
       state.tagsViewRoutesList = store.state.tagsViewRoutes.tagsViewRoutes
-      addTagsView(route)
+      if (fromOnmount) {
+        state.tagsViewList = store.state.tagsViewRoutes.tagsViewRoutes
+      } else {
+        addTagsView(route)
+      }
     }
 
     // 1、添加 tagsView：未设置隐藏（isHide）也添加到在 tagsView 中
@@ -224,14 +231,13 @@ export default {
     }
 
     // 监听路由的变化，动态赋值给 tagsView
-    watch(store.state, (val) => {
-      if (
-        val.tagsViewRoutes.tagsViewRoutes.length ===
-        state.tagsViewRoutesList.length
-      )
-        return false
-      getTagsViewRoutes()
-    })
+    watch(
+      () => store.state.tagsViewRoutes.tagsViewRoutes,
+      (val) => {
+        if (val.length === state.tagsViewRoutesList.length) return false
+        getTagsViewRoutes()
+      }
+    )
     // 页面加载前
     onBeforeMount(() => {})
     // 页面卸载时
@@ -243,7 +249,7 @@ export default {
     // 页面加载时
     onMounted(() => {
       // 初始化 vuex 中的 tagsViewRoutes 列表
-      getTagsViewRoutes()
+      getTagsViewRoutes(true)
     })
 
     /**

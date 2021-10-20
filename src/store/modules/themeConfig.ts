@@ -26,7 +26,7 @@ const themeConfigModule: Module<ThemeConfigState, RootStateTypes> = {
 		// 默认菜单导航背景颜色，请注意：需要同时修改 `/@/theme/common/var.scss` 对应的值
 		menuBar: '#545c64',
 		// 是否开启 TagsView 缓存
-		isCacheTagsView: false,
+		isCacheTagsView: true,
 		// 是否开启菜单手风琴效果
 		isUniqueOpened: true,
 		// 是否开启 Tagsview 图标

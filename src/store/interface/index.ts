@@ -88,6 +88,7 @@ export interface RoutesListState {
 }
 
 export interface TagsViewRoutesState {
+  tagsSession:string
   tagsViewRoutes: Array<Menu>
 }
 

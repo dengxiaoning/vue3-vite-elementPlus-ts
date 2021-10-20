@@ -41,7 +41,7 @@
 <script lang="ts">
 import type { PropType } from 'vue'
 import type { Menu } from 'store/interface/index'
-import { ref, toRefs, reactive, computed, defineComponent, watch } from 'vue'
+import { ref, toRefs, reactive, computed, defineComponent,  } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { useStore } from 'store/index'
 import SubItem from './subItem.vue'
