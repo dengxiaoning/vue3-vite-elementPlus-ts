@@ -1,10 +1,10 @@
 <template>
   <div class="login">
     <div class="login_logo">
-      <img src="@/assets/image/visual/logo.png"
-           alt="">
+      <img src="@/assets/logo.png"
+           alt=""><span>Data Manage Platform</span>
     </div>
-    <h1>水利工程数字孪生协同管理平台</h1>
+    <h1>大数据协同管理平台</h1>
     <div class="login_box">
       <el-input placeholder="请输入用户名"
                 prefix-icon="el-icon-user"
@@ -70,6 +70,16 @@ export default defineComponent({
     height: 87px;
     padding-top: 30px;
     margin-left: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    img {
+      width: 60px;
+      height: 60px;
+      margin-right: 6px;
+    }
   }
   h1 {
     font-size: 50px;

@@ -82,48 +82,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       //   }
       // }
     },
-    // server: {
-    //   host: 'localhost',
-    //   port: VITE_PORT,
-    //   https: false,
-    //   proxy: {
-    //       '^/(masterdataDomain|taskDomain|userDomain|pim/admin|oms/admin)': {
-    //           target: 'http://dev.backendapi.aid.connext.net.cn/' // 开发
-    //         // target: 'http://test.backendapi.aid.connext.net.cn/' // 测试
-    //         }
-    //     }
-    // },
-    // build:{
-    //   rollupOptions:{
-    //     // input: 'app.js',
-    //     // external: ['elementPlus'],
-    //     // output: {
-    //     //   globals: {
-    //     //     'elementPlus': 'https://unpkg.com/element-plus@1.0.2-beta.44/lib/index.js'
-    //     //   }
-    //     // }
-    //     output: {
-    //       assetFileNames: 'css/[name].[hash].css',
-    //       chunkFileNames: 'js/[name].[hash].js',
-    //       entryFileNames: 'js/[name].[hash].js',
-    //       manualChunks(id) {
-    //         //打包chunk命名和代码分割
-    //         const chunkMap = new Map();
-    //         chunkMap.set(/[\\/]src[\\/]layout[\\/]/.test(id), 'basicLayout');
-    //         chunkMap.set(/[\\/]src[\\/]components[\\/]/.test(id), 'basicComponent');
-    //         chunkMap.set(/[\\/]node_modules[\\/]/.test(id), 'vendors');
-    //         chunkMap.set(/[\\/]node_modules[\\/]echarts[\\/]/.test(id), 'echarts');
-    //         chunkMap.set(/[\\/]node_modules[\\/]lodash[\\/]/.test(id), 'lodash');
-    //         chunkMap.set(/[\\/]node_modules[\\/]moment[\\/]/.test(id), 'moment');
-    //         chunkMap.set(/[\\/]node_modules[\\/]xlsx[\\/]xlsx.js/.test(id), 'xlsxIndex');
-    //         chunkMap.set(/[\\/]node_modules[\\/]xlsx[\\/](?!(xlsx.js))/.test(id), 'xlsx');
-    //         chunkMap.set(/[\\/]node_modules[\\/]element-plus[\\/]/.test(id), 'element');
-    //         if(chunkMap.get(true)) return chunkMap.get(true);
-    //       }
-    //     },
-        
-
-    //   },
-    // }
+    build: {
+      outDir:'csdata'
+    }
   })
 }

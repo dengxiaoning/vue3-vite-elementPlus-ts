@@ -49,7 +49,7 @@
         </div>
       </el-tooltip>
       <el-image style="width: 35px; height: 35px;border-radius: 50%;cursor: pointer"
-                src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                src="@/assets/image/profile.jpg"
                 fit="cover">
       </el-image>
       <el-dropdown>

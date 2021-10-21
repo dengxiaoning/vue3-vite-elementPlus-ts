@@ -1,0 +1,309 @@
+[
+  {
+    "name": "sysManage",
+    "path": "/sysManage",
+    "component": "Layout",
+    "meta": {
+      "auth": ["admin", "test"],
+      "title": "系统管理",
+      "icon": "whh:managedhosting",
+      "isAffix": false,
+      "isHide": false,
+      "isKeepAlive": true
+    },
+    "children": [{
+      "name": "sysLog",
+      "path": "sysLog",
+      "component": "sysManage/log/index",
+      "meta": {
+        "auth": ["admin", "test"],
+        "title": "操作日志",
+        "icon": "icon-park-outline:log",
+        "isAffix": false,
+        "isHide": false,
+        "isKeepAlive": true
+      }
+    },{
+      "name": "sysConfig",
+      "path": "sysConfig",
+      "component": "sysManage/config/index",
+      "meta": {
+        "auth": ["admin", "test"],
+        "title": "系统配置",
+        "icon": "grommet-icons:configure",
+        "isAffix": false,
+        "isHide": false,
+        "isKeepAlive": true
+      }
+    },{
+      "name": "sysAuth",
+      "path": "sysAuth",
+      "component": "sysManage/auth/index",
+      "meta": {
+        "auth": ["admin", "test"],
+        "title": "权限配置",
+        "icon": "eos-icons:role-binding-outlined",
+        "isAffix": false,
+        "isHide": false,
+        "isKeepAlive": true
+      }
+    },{
+      "name": "sysCodeReg",
+      "path": "sysCodeReg",
+      "component": "sysManage/codeReg/index",
+      "meta": {
+        "auth": ["admin", "test"],
+        "title": "编码规则",
+        "icon": "bi:journal-code",
+        "isAffix": false,
+        "isHide": false,
+        "isKeepAlive": true
+      }
+    }]
+  },
+  {
+    "name": "projManage",
+    "path": "/projManage",
+    "component": "Layout",
+    "meta": {
+      "auth": ["admin", "test"],
+      "title": "项目管理",
+      "icon": "carbon:gui-management",
+      "isAffix": false,
+      "isHide": false,
+      "isKeepAlive": true
+    },
+    "children": [{
+      "name": "myProj",
+      "path": "myProj",
+      "component": "projManage/myProj/index",
+      "meta": {
+        "auth": ["admin", "test"],
+        "title": "我的项目",
+        "icon": "grommet-icons:projects",
+        "isAffix": false,
+        "isHide": false,
+        "isKeepAlive": true
+      }
+    },
+      {
+        "name": "addProj",
+        "path": "addProj",
+        "component": "projManage/addProj/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "创建项目",
+          "icon": "carbon:document-add",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },
+      {
+        "name": "projRecord",
+        "path": "projRecord",
+        "component": "projManage/projRecord/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "项目台账",
+          "icon": "oi:project",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },
+      {
+        "name": "projTemplate",
+        "path": "projTemplate",
+        "component": "projManage/projTemplate/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "项目模板",
+          "icon": "icon-park-outline:page-template",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },
+      {
+        "name": "taskResolve",
+        "path": "taskResolve",
+        "component": "projManage/taskResolve/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "任务分解",
+          "icon": "carbon:task-tools",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },
+      {
+        "name": "createTask",
+        "path": "createTask",
+        "component": "projManage/createTask/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "创建任务",
+          "icon": "carbon:task-add",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },
+      {
+        "name": "projExecute",
+        "path": "projExecute",
+        "component": "projManage/projExecute/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "项目执行",
+          "icon": "eos-icons:project-outlined",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },
+      {
+        "name": "projInfo",
+        "path": "projInfo",
+        "component": "projManage/projInfo/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "项目信息",
+          "icon": "octicon:project-24",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "docManage",
+    "path": "/docManage",
+    "component": "Layout",
+    "meta": {
+      "auth": ["admin", "test"],
+      "title": "文档管理",
+      "icon": "fa-regular:file-archive",
+      "isAffix": false,
+      "isHide": false,
+      "isKeepAlive": true
+    },
+    "children": [{
+      "name": "docRecord",
+      "path": "docRecord",
+      "component": "docManage/docRecord/index",
+      "meta": {
+        "auth": ["admin", "test"],
+        "title": "文档台账",
+        "icon": "bytesize:archive",
+        "isAffix": false,
+        "isHide": false,
+        "isKeepAlive": true
+      },
+      "children": [{
+        "name": "doc",
+        "path": "doc",
+        "component": "docManage/docRecord/doc/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "文档",
+          "icon": "carbon:document",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },{
+        "name": "img",
+        "path": "img",
+        "component": "docManage/docRecord/img/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "图片",
+          "icon": "bi:image-fill",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },{
+        "name": "video",
+        "path": "video",
+        "component": "docManage/docRecord/video/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "视频",
+          "icon": "bi:camera-video",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },{
+        "name": "audio",
+        "path": "audio",
+        "component": "docManage/docRecord/audio/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "音频",
+          "icon": "ant-design:audio-outlined",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      },{
+        "name": "another",
+        "path": "another",
+        "component": "docManage/docRecord/another/index",
+        "meta": {
+          "auth": ["admin", "test"],
+          "title": "其它",
+          "icon": "icon-park-outline:other",
+          "isAffix": false,
+          "isHide": false,
+          "isKeepAlive": true
+        }
+      }]
+    },
+    {
+      "name": "techApply",
+      "path": "techApply",
+      "component": "docManage/techApply/index",
+      "meta": {
+        "auth": ["admin", "test"],
+        "title": "科技申报",
+        "icon": "fluent:shield-task-20-regular",
+        "isAffix": false,
+        "isHide": false,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "name": "cmaAuth",
+      "path": "cmaAuth",
+      "component": "docManage/cmaAuth/index",
+      "meta": {
+        "auth": ["admin", "test"],
+        "title": "CMA认证",
+        "icon": "carbon:task-approved",
+        "isAffix": false,
+        "isHide": false,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "name": "docInfo",
+      "path": "docInfo",
+      "component": "docManage/docInfo/index",
+      "meta": {
+        "auth": ["admin", "test"],
+        "title": "文档信息",
+        "icon": "et:document",
+        "isAffix": false,
+        "isHide": false,
+        "isKeepAlive": true
+      }
+    }
+  ]
+  }
+]
