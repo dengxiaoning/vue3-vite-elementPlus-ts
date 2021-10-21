@@ -49,7 +49,7 @@
         </div>
       </el-tooltip>
       <el-image style="width: 35px; height: 35px;border-radius: 50%;cursor: pointer"
-                src="@/assets/image/profile.jpg"
+                :src="avatar"
                 fit="cover">
       </el-image>
       <el-dropdown>
@@ -80,6 +80,7 @@ import {
 } from 'vue-router'
 import { useStore } from 'store/index'
 import type { AppRouteRecordRaw } from 'store/interface/index'
+import avatar from '@/assets/image/profile.jpg'
 interface State {
   breadcrumbList: AppRouteRecordRaw[]
   routeSplit: string[]
@@ -179,7 +180,8 @@ export default {
       ...toRefs(state),
       ountlogin,
       to3dVisual,
-      to2dVisual
+      to2dVisual,
+      avatar
     }
   }
 }

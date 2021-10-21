@@ -7,8 +7,7 @@ import { onMounted, onUnmounted, defineComponent } from 'vue'
 import * as Cesium from 'cesium'
 // Your access token can be found at: https://cesium.com/ion/tokens.
 // This is the default access token from your ion account
-Cesium.Ion.defaultAccessToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyYzllNDhmYS1kNzE1LTRhOWUtOWIzZS1kMmU4ODhiNGQ2NTEiLCJpZCI6MTIxODIsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1NjA0OTQ5ODZ9.VJPGTRjjplXV5xPgr6AFOjIN6xy-ymdxoZDsPWc2T0Q'
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4NzNiMDhkOS0wMWVkLTQ1MDYtOTE5Zi1iNjVmNzU1YzdlYzEiLCJpZCI6MTIxODIsImlhdCI6MTYzNDgyMTQwNX0.KS4Fov-Kdyfr7lxby8WHSUoYipl2XK5zhf204iwQJNE'
 let buildingTileset
 export default defineComponent({
   name: 'v3dpage',
@@ -46,9 +45,6 @@ function initCesiumVisual() {
     viewer._cesiumWidget._creditContainer.style.display = "none";
     viewer.scene.globe.depthTestAgainstTerrain = true; //解决地形遮挡entity问题
 
-    var tileset = new Cesium.Cesium3DTileset({
-      url: Cesium.IonResource.fromAssetId(125737),
-    });
     // Add Cesium OSM Buildings, a global 3D buildings layer.
     buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings())
     // Fly the camera to San Francisco at the given longitude, latitude, and height.
