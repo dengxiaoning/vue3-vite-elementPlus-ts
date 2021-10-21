@@ -78,6 +78,20 @@ export const constantRoutes = [
     path: '/login',
     name:'login',
     component: () => import('@/views/login/login.vue')
+  },
+  {
+    path: '/visual',
+    name:'visual',
+    component: () => import('@/views/visual/index.vue'),
+    children: [{
+      path: 'v3d',
+      name:'v3d',
+      component: () =>  import('@/views/visual/v3d/index.vue'),
+    },{
+      path: 'v2d',
+      name:'v2d',
+      component: () =>  import('@/views/visual/v2d/index.vue'),
+    }]
   }
 ]
 

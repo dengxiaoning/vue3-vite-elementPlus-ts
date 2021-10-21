@@ -8,6 +8,7 @@ import { configMockPlugin } from './src/plugins/configMockPlugin'
 import { configStyleImportPlugin } from './src/plugins/configStyleImportPlugin'
 import { configHtmlPlugin } from './src/plugins/configHtmlPlugin'
 import { configCompressPlugin } from './src/plugins/configCompressPlugin'
+import cesium from 'vite-plugin-cesium';
 
 import { wrapperEnv } from './src/utils/env'
 const resolve = (dir: string) => path.join(__dirname, dir)
@@ -37,6 +38,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     plugins: [
       vue(),
       vueJsx(),
+      cesium(),
       configSvgIconsPlugin(isBuild), // svg 处理
       configStyleImportPlugin(isBuild), // element-plus 按需引入
       configHtmlPlugin(viteEnv, isBuild), //  EJS 标签处理

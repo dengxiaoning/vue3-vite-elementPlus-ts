@@ -258,10 +258,12 @@ export default {
      *
      */
     onBeforeRouteUpdate((to) => {
-      state.routePath = to.path
-      addTagsView(to)
-      getTagsRefsIndex(to.path)
-      tagsViewmoveToCurrentTag()
+      if (to.meta['title']) {
+        state.routePath = to.path
+        addTagsView(to)
+        getTagsRefsIndex(to.path)
+        tagsViewmoveToCurrentTag()
+      }
     })
 
     /**
@@ -269,10 +271,12 @@ export default {
      *https://www.jianshu.com/p/c3ffc1c155dc
      */
     onBeforeRouteLeave((to) => {
-      state.routePath = to.path
-      addTagsView(to)
-      getTagsRefsIndex(to.path)
-      tagsViewmoveToCurrentTag()
+      if (to.meta['title']) {
+        state.routePath = to.path
+        addTagsView(to)
+        getTagsRefsIndex(to.path)
+        tagsViewmoveToCurrentTag()
+      }
     })
     return {
       isActive,

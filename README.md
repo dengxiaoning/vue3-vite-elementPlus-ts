@@ -1,9 +1,11 @@
-## 创数大数据平台(cs-data-platform)
+## 数据管理平台(skeletal-sys)
 
 ## 简介
 
-创数大数据平台：集成数据管理，文档管理，项目管理等功能模块
-涉及模块，菜单，操作功能权限管理分配
+数据管理平台：集成数据管理，文档管理，项目管理等功能模块
+涉及模块，菜单，操作功能权限管理分配等功能模块，目前该系统
+为初版骨架型，未涉及太多其它功能模块，只有搭建了一个大的
+骨架，其它功能模块需要自行添加完善,自由发挥
 
 ## 目录结构
 
@@ -26,7 +28,7 @@
 | |-- store # 全局 vuex
 | |-- utils # 全局公用方法
 | |-- views # 所有页面
-| |-- App.vue # 入口页面
+| |-- App.tsx # 入口页面
 | |-- main.ts # 入口文件
 | |-- shims-vue.d.ts # ts 声明文件
 |-- static # 静态资源
@@ -38,7 +40,7 @@
 |-- .eslintignore # eslintignore
 |-- .eslintrc.js # eslint 配置项
 |-- .gitignore # gitignore
-|-- babel.config.js # babel 配置项
+|-- .babelrc # babel 配置项
 |-- index.html # html 模板
 |-- package.json # package.json
 |-- README.md # README

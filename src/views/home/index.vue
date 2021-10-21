@@ -1,52 +1,48 @@
 <template>
-  <div id="cesiumContainer"></div>
+  <div>
+    <HelloWorld msg="build 时候，组件必传参数, 父组件传子组件" />
+    <el-button @click="addCount">count is: {{ count }}</el-button>
+  </div>
 </template>
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import { useStore } from 'store/index'
+import { useRoute } from 'vue-router'
+import HelloWorld from '@/components/HelloWorld.vue'
 
-<script>
-import { onMounted, onUnmounted } from 'vue'
-import * as Cesium from 'cesium'
-// Your access token can be found at: https://cesium.com/ion/tokens.
-// This is the default access token from your ion account
-Cesium.Ion.defaultAccessToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmYzkwZWEwYy1mMmIwLTQwYjctOWJlOC00OWU4ZWU1YTZhOTkiLCJpZCI6MTIxODIsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1NjA0OTUyNDN9.wagvw7GxUjxvHXO6m2jjX5Jh9lN0UyTJhNGEcSm2pgE'
-let buildingTileset
-export default {
-  name: 'HelloWorld',
-  setup() {
-    initCesiumVisual()
-    onUnmounted(() => {
-      buildingTileset = null
-    })
-    return {}
+export default defineComponent({
+  name: 'App',
+  components: {
+    HelloWorld
   },
-}
-function initCesiumVisual() {
-  onMounted(() => {
-    // Initialize the Cesium Viewer in the HTML element with the "cesiumContainer" ID.
-    const viewer = new Cesium.Viewer('cesiumContainer', {
-      terrainProvider: Cesium.createWorldTerrain(),
-    })
-    // Add Cesium OSM Buildings, a global 3D buildings layer.
-    buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings())
-    // Fly the camera to San Francisco at the given longitude, latitude, and height.
-    viewer.camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(-122.4175, 37.655, 400),
-      orientation: {
-        heading: Cesium.Math.toRadians(0.0),
-        pitch: Cesium.Math.toRadians(-15.0),
+  setup() {
+    const store = useStore()
+
+    const count: any = computed({
+      get() {
+        return store.state.app.count
       },
+      set(value) {
+        // store.commit('increment', value)
+        store.dispatch('changeCount', value)
+      }
     })
-  })
-}
+
+    function addCount() {
+      count.value += 1
+    }
+
+    //router是全局路由对象，route= userRoute()是当前路由对象
+    let route = useRoute()
+    let num = route.query.num
+    //let num = route.params.num;
+    console.log('it receive params is :', num)
+    return {
+      count,
+      addCount
+    }
+  }
+})
 </script>
-<style scoped>
-html,
-body,
-#cesiumContainer {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-</style>
+
+<style></style>

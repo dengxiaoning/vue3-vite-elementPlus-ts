@@ -29,6 +29,25 @@
       </el-breadcrumb>
     </div>
     <div class="layout-navbars-breadcrumb-right">
+      <el-tooltip content="二维地图"
+                  effect="dark"
+                  placement="bottom"
+                  class="right-menu-item hover-effect">
+        <div>
+          <svg-icon icon-class="secondDimension"
+                    @click="to2dVisual" />
+        </div>
+      </el-tooltip>
+
+      <el-tooltip content="三维地图"
+                  effect="dark"
+                  placement="bottom"
+                  class="right-menu-item hover-effect">
+        <div>
+          <svg-icon icon-class="threeDimesion"
+                    @click="to3dVisual" />
+        </div>
+      </el-tooltip>
       <el-image style="width: 35px; height: 35px;border-radius: 50%;cursor: pointer"
                 src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
                 fit="cover">
@@ -41,7 +60,8 @@
           <el-dropdown-menu>
             <el-dropdown-item>个人信息</el-dropdown-item>
             <el-dropdown-item>修改密码</el-dropdown-item>
-            <el-dropdown-item divided>退出登录</el-dropdown-item>
+            <el-dropdown-item divided
+                              @click="ountlogin">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -106,6 +126,7 @@ export default {
             // 继续寻找下一项
             state.routeSplitFirst = arrs[state.routeSplitIndex]
             state.breadcrumbList.push(item)
+
             state.routeSplitIndex++
             if (item.children) getBreadcrumbList(item.children)
           }
@@ -124,23 +145,41 @@ export default {
     }
     // 页面加载时
     onMounted(() => {
-      initRouteSplit(route.path)
+      if (route.meta['title']) {
+        initRouteSplit(route.path)
+      }
     })
-    // 路由更新时
+    // 路由更新时,to.meta['title']避免其它可视化全屏报错
     onBeforeRouteUpdate((to) => {
       state.breadcrumbList = []
-      initRouteSplit(to.path)
+      if (to.meta['title']) {
+        initRouteSplit(to.path)
+      }
     })
-
+    // 路由离开时
     onBeforeRouteLeave((to: any) => {
       state.breadcrumbList = []
-      initRouteSplit(to.path)
+      if (to.meta['title']) {
+        initRouteSplit(to.path)
+      }
     })
+    const ountlogin = () => {
+      router.push('/login')
+    }
+    const to3dVisual = () => {
+      router.push('/visual/v3d')
+    }
+    const to2dVisual = () => {
+      router.push('/visual/v2d')
+    }
     return {
       onThemeConfigChange,
       getThemeConfig,
       onBreadcrumbClick,
-      ...toRefs(state)
+      ...toRefs(state),
+      ountlogin,
+      to3dVisual,
+      to2dVisual
     }
   }
 }
@@ -174,6 +213,22 @@ export default {
     align-items: center;
     justify-content: flex-end;
     padding-right: 6px;
+  }
+  .right-menu-item {
+    display: inline-block;
+    padding: 0 8px;
+    font-size: 18px;
+    color: #5a5e66;
+    vertical-align: text-bottom;
+
+    &.hover-effect {
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.025);
+      }
+    }
   }
   ::v-deep(.el-breadcrumb__separator) {
     opacity: 0.7;
