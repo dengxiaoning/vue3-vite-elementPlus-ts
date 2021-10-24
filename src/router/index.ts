@@ -39,7 +39,7 @@ export const constantRoutes = [
           isAffix: false,
           isHide: false,
           isKeepAlive: true,
-          title: 'demo',
+          title: '基础案例',
           index: '2'
         },
       },
@@ -53,7 +53,7 @@ export const constantRoutes = [
           isAffix: false,
           isHide: false,
           isKeepAlive: true,
-          title: 'icon',
+          title: '演示案例',
           index: '3'
         },
       },
@@ -67,7 +67,7 @@ export const constantRoutes = [
           isAffix: false,
           isHide: false,
           isKeepAlive: true,
-          title: 'elementIcon',
+          title: 'elementIcon案例',
           index: '4'
         },
       }
