@@ -165,7 +165,15 @@ export default {
       }
     })
     const ountlogin = () => {
-      router.push('/login')
+      var logout = store.dispatch('LogOut')
+      logout
+        .then((res) => {
+          console.log(res)
+          router.push('/login')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
     const to3dVisual = () => {
       router.push('/visual/v3d')

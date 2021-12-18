@@ -1,6 +1,11 @@
 import { Module } from 'vuex';
 import { Userinfo, RootStateTypes } from '../interface/index';
-
+import {
+  getToken,
+  setToken,
+  removeToken
+} from '../../utils/auth'
+const SIMULATE_USER_TOKEN = 'USER-TOKEN'
 const userstate: Module<Userinfo, RootStateTypes> = {
   state() {
     return {
@@ -38,8 +43,12 @@ const userstate: Module<Userinfo, RootStateTypes> = {
           const code = userInfo.code
           const uuid = userInfo.uuid
       return new Promise((resolve: any, reject: any) => {
+        var simulateToken = 'fdsakjahkhfdjasdhlafdslkdfl'
+        // 模拟登录
+        setToken(SIMULATE_USER_TOKEN,simulateToken)
         commit('SET_TOKEN', 'fdsakjahkhfdjasdhlafdslkdfl')
-        resolve()
+        resolve('恭喜你登录成功')
+            // 生产环境调用登录接口
             // login(username, password, code, uuid).then((res:any) => {
             //   setToken(res.token)
             //   commit('SET_TOKEN', res.token)
@@ -170,8 +179,8 @@ const userstate: Module<Userinfo, RootStateTypes> = {
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         commit('SET_PERMISSIONS', [])
-        // removeToken()
-        resolve()
+        removeToken(SIMULATE_USER_TOKEN)
+        resolve('退出登录成功')
         // logout().then(() => {
         //   commit('SET_TOKEN', '')
         //   commit('SET_ROLES', [])
@@ -189,7 +198,7 @@ const userstate: Module<Userinfo, RootStateTypes> = {
     }:any) {
       return new Promise((resolve:any) => {
         commit('SET_TOKEN', '')
-        // removeToken()
+        removeToken(SIMULATE_USER_TOKEN)
         resolve()
       })
     }

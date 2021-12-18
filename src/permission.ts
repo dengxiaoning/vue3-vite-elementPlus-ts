@@ -2,6 +2,7 @@ import router from './router/index'
 import store from './store/index'
 import { AppRouteRecordRaw } from 'store/interface/index';
 import Layout from '@/layout/index.vue'
+import {getToken} from '@/utils/auth'
 import {
   ElMessage,
   ElLoading
@@ -14,23 +15,21 @@ NProgress.configure({
   showSpinner: false
 })
 const obtainModules = getMoulesByRoute();
-const whiteList = ['/auth-redirect', '/bind', '/register']
+const whiteList = ['/login', '/auth-redirect', '/bind', '/register']
 
 router.beforeEach((to:any, from:any, next:any) => {
-  const userislogin = sessionStorage.getItem('userInfo');
+  const hasetoken = getToken('USER-TOKEN');
   NProgress.start()
   /* has token*/
 
-  if (!userislogin) {
-    if (to.path === '/login') {
-      next()
-    } else {
-      next('/login') // h
-    }
-
+  if (hasetoken) {
+     /* has token*/
+   if (to.path === '/login') {
+    next({
+      path: '/'
+    })
     NProgress.done()
-  } else {
-
+   } else {
     if (store.state.user.roles.length === 0) {
       const loading = ElLoading.service();
       // 判断当前用户是否已拉取完user_info信息
@@ -60,6 +59,16 @@ router.beforeEach((to:any, from:any, next:any) => {
         })
     } else {
       next()
+    }
+   }
+  } else {
+    // 没有token
+    if (whiteList.indexOf(to.path) !== -1) {
+      // 在免登录白名单，直接进入
+      next()
+    } else {
+      next(`/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
+      NProgress.done()
     }
   }
 })
