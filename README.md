@@ -62,7 +62,7 @@
 ## 项目演示
 
 - 登录
-  ![loginpage](https://github.com/dengxiaoning/vue3-vite-elementPlus-ts/blob/master/src/assets/image/example/loginpage.png)
+  ![loginpage](https://github.com/dengxiaoning/vue3-vite-elementPlus-ts/blob/master/src/assets/image/example/loginpagenew.png)
 - 首页
   ![mainpage](https://github.com/dengxiaoning/vue3-vite-elementPlus-ts/blob/master/src/assets/image/example/firstPage.gif)
 - 二维
@@ -87,7 +87,6 @@ yarn dev  or  npm run dev
 ```
 yarn build or npm run build
 ```
-
 
 ## 浏览器支持
 
