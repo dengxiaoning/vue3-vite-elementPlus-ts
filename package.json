@@ -8,10 +8,13 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@vueup/vue-quill": "^1.0.0-beta.7",
     "axios": "^0.21.1",
     "cesium": "1.84.0",
     "element-plus": "^1.0.2-beta.41",
+    "elui-china-area-dht": "^1.0.4",
     "flatted": "^3.2.2",
+    "js-cookie": "2.2.0",
     "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
     "nprogress": "0.2.0",
@@ -19,8 +22,7 @@
     "path-browserify": "^1.0.1",
     "vue": "^3.0.5",
     "vue-router": "^4.0.6",
-    "vuex": "^4.0.0",
-    "js-cookie": "2.2.0"
+    "vuex": "^4.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.14.5",

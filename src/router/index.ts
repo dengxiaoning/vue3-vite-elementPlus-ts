@@ -39,22 +39,22 @@ export const constantRoutes = [
           isAffix: false,
           isHide: false,
           isKeepAlive: true,
-          title: '基础案例',
+          title: '数据双向绑定案例',
           index: '2'
         },
       },
       {
-        path: '/icon',
-        name:'icon',
-        component: () => import('views/icon/index.vue'),
+        path: '/dynForm',
+        name:'dynForm',
+        component: () => import('views/dynForm/index.vue'),
         meta: {
           auth: ['admin', 'test'],
           icon: 'carbon:rule-test',
           isAffix: false,
           isHide: false,
           isKeepAlive: true,
-          title: '演示案例',
-          index: '3'
+          title: '动态创建form案例',
+          index: '2'
         },
       },
       {

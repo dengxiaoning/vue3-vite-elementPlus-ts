@@ -1,5 +1,5 @@
 <template>
-  <div>project manage》 add project </div>
+  <div>project manage》addproj </div>
 </template>
 
 <script>
