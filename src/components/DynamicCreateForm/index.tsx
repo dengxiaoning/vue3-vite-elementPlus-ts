@@ -12,13 +12,13 @@ const DynamicForm = defineComponent({
   },
   setup(props: PropsFormat, { slots, attrs, expose }) {
 
-    const combCom = (fItem:Array<FormItemFormat>) => {
+    const combCom =(fItem:Array<FormItemFormat>) => {
       const formItem = []
     
       for (let i = 0; i < fItem.length; i++){
-          const subItem = fItem[i];
+        const subItem = fItem[i];
           const modelFormObj = props.dynaFormData.modelName
-          const {slotName,modelValueName,overElLabel,selectMultiple} = subItem;
+          const { slotName,modelValueName, overElLabel, selectMultiple } = subItem;
           const itemChildren = subItem['children'];
 
           const custLabelSlots = {
@@ -66,7 +66,9 @@ const DynamicForm = defineComponent({
             formItem.push(<el-form-item v-slots={custLabelSlots} prop={modelValueName}> 
               <el-select v-model={modelFormObj[modelValueName]} class={subItem['custClass']} multiple={selectMultiple}>
             {...optionsArr}
-                </el-select>
+              </el-select>
+                  {/* @ts-ignore */}
+                  {subItem['extraSlot']?slots[slotName]():''}
             </el-form-item>)
           } else if (subItem['type'] === 'el-switch') {
             formItem.push(<el-form-item v-slots={custLabelSlots} prop={modelValueName}> 
@@ -91,6 +93,8 @@ const DynamicForm = defineComponent({
                <el-radio-group v-model={modelFormObj[modelValueName]}>
                {...optionsArr}
               </el-radio-group>
+                  {/* @ts-ignore */}
+                  {subItem['extraSlot']?slots[slotName]():''}
             </el-form-item>)
           }
       }

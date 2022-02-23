@@ -48,6 +48,18 @@
           <upload-file @uploadFileCtrl="uploadFileCtrl"
                        :file-data-list="fileDataList" />
         </template>
+        <!-- 保留字段slot begin-->
+        <template v-for="(item,index) in keepFieldSlotArr"
+                  v-slot:[item.slotNameStr]
+                  :key="index">
+          <div class="icon-container">
+            <CIcon icon-class="el:remove-circle"
+                   icon-color="#333"
+                   cust-class="keep-field-iconfont"
+                   @click="delKeepField(item)" />
+          </div>
+        </template>
+        <!--保留字段slot end  -->
       </dynamic-create-form>
     </section>
     <section class="customer-field">
@@ -163,14 +175,14 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref, unref } from 'vue'
+import { defineComponent, onMounted, reactive, ref, unref, nextTick } from 'vue'
 // More info see https://github.com/element-plus/element-plus/blob/dev/docs/examples/form/utils.ts
 // import { resetForm, submitForm } from './utils'
 import type { ElForm } from 'element-plus'
 import SubPart from '@/utils/dynamicForm/subPart'
 import { Utils } from '@/utils'
 import { uploadAvatar } from '@/api/systemMang'
-import { ElLoading, ElMessage } from 'element-plus'
+import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
 const PATH_URL: string = import.meta.env.VITE_GLOB_API_URL as string
 interface JsonKeyVal {
   [key: string]: any
@@ -182,12 +194,14 @@ interface DomainItem {
 export default defineComponent({
   setup() {
     onMounted(() => {
+      initKeepArr()
       getProkeepFiled()
     })
     const dialogVisible = ref(false)
     const keepFieldArr: JsonKeyVal = reactive([])
     const addOptionsForm = ref<InstanceType<typeof ElForm>>()
     const customerForm = ref<InstanceType<typeof ElForm>>()
+    const keepFieldSlotArr = ref<JsonKeyVal>([])
     // 新增字段form 数据
     const formInline = reactive({
       showname: '',
@@ -196,6 +210,20 @@ export default defineComponent({
       inputway: '',
       ismust: ''
     })
+
+    const initKeepArr = () => {
+      let num = 1
+      while (num < 7) {
+        const joinKey = `field${num}`
+        keepFieldSlotArr.value.push({
+          slotNameStr: joinKey + 'CodeSlot',
+          modelValueName: joinKey,
+          labelName: '',
+          type: ''
+        })
+        num++
+      }
+    }
 
     /**
      * 获取对应：dynaform（动态form v-model数据)，
@@ -251,7 +279,14 @@ export default defineComponent({
      */
     const getProkeepFiled = () => {
       // 模拟接口调用
-      const protectField = ['field1', 'field3', 'field4', 'field5']
+      const protectField = [
+        'field1',
+        'field2',
+        'field3',
+        'field4',
+        'field5',
+        'field6'
+      ]
       protectField.forEach((e: any) => {
         keepFieldArr.push({
           label: e,
@@ -367,14 +402,28 @@ export default defineComponent({
           })
         })
       }
-      const obtainJson = {
-        ...inputTypeConst[formInline.inputway],
-        labelName: formInline.showname,
-        modelValueName: formInline.propertyname,
-        overElLabel: true,
-        options: custOptions
+      const { showname, propertyname, newpropertyname, inputway, ismust } =
+        formInline
+      // 我们为每一个保留字段新增一个flag来实现后期的maintain操作
+      const keepExtraProp = {
+        slotName: propertyname + 'CodeSlot',
+        colSpan: '',
+        extraSlot: true,
+        custClass: 'adjues-proj-code-width' // 自定义一个class
       }
-      addTag(obtainJson)
+      const obtainJson = {
+        ...inputTypeConst[inputway],
+        labelName: showname,
+        modelValueName: propertyname,
+        overElLabel: true,
+        options: custOptions,
+        ...keepExtraProp
+      }
+      try {
+        addTag(obtainJson)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     const checkAddDataValid = () => {
@@ -513,8 +562,18 @@ export default defineComponent({
         colObj2.children.push(compsObj)
         formItemSub.splice(formItemSub.length - 3, 0, rowObj)
       }
+      let resetKeepfield: JsonKeyVal = unref(keepFieldSlotArr)
+      // 更新保留字段slot数组,用于删除时提示
+      resetKeepfield.forEach((e: JsonKeyVal) => {
+        if (e.modelValueName === createJson.modelValueName) {
+          e.labelName = createJson.labelName
+          e.type = createJson.type
+        }
+      })
       resetFormAfterAddField()
     }
+
+    // 保留字段新增后重置，form中内容
     const resetFormAfterAddField = () => {
       dynamicValidateForm.domains = []
       dynamicValidateForm.defaultOption = ''
@@ -527,9 +586,121 @@ export default defineComponent({
       const customerFormREST = unref(customerForm)
       customerFormREST.resetFields()
     }
+
     // 文件上传callback
     const uploadFileCtrl = (fileList: Array<any>) => {
       console.log(fileList)
+    }
+
+    /**
+     * 将el-row中的children向前移动
+     */
+    const recursionMoveDynFormItem = (
+      parentNode: any,
+      chilNode: any,
+      preIndex: number,
+      findModelType: string
+    ) => {
+      chilNode.forEach((item: any, index: number) => {
+        const modelType = item.type
+        if (modelType === findModelType && item.children.length < 2) {
+          // 找到该数据
+          if (!parentNode) {
+            if (item.children <= 0) {
+              // 当 children 为空时
+              chilNode.splice(index, 1)
+            } else if (chilNode.length - 1 > index) {
+              if (!chilNode[index + 1]) {
+                // 如果他的children 为空，那么就该删除了
+                // delete chilNode[index]
+                chilNode.splice(index, 1) // 将children中的undefined移除
+              } else if (chilNode[index + 1]['type'] === findModelType) {
+                if (chilNode[index + 1]['children'][0]) {
+                  item.children.push(chilNode[index + 1]['children'][0])
+                  chilNode[index + 1]['children'].splice(0, 1)
+                } else {
+                  // delete chilNode[index + 1]
+                  chilNode.splice(index + 1, 1)
+                }
+              }
+            }
+          }
+          // if it is el-row
+          else if (parentNode.length - 1 > preIndex) {
+            if (parentNode[preIndex + 1]['type'] === findModelType) {
+              if (parentNode[preIndex + 1]['children'][0]) {
+                item.children.push(parentNode[preIndex + 1]['children'][0])
+                parentNode[preIndex + 1]['children'].splice(0, 1)
+              } else {
+                // delete parentNode[preIndex + 1]
+                parentNode.splice(preIndex + 1, 1)
+              }
+            }
+          } else if (parentNode.length <= 1) {
+            parentNode.splice(preIndex, 1)
+          }
+        } else if (item.children && item.children.length > 0) {
+          recursionMoveDynFormItem(
+            chilNode,
+            item.children,
+            index,
+            findModelType
+          )
+        }
+      })
+    }
+
+    // 根据modelValueName递归删除formItem
+    const recursionDelDynFormItem = (
+      parentNode: any,
+      chilNode: any,
+      preIndex: Number,
+      findModelStr: string
+    ) => {
+      chilNode.forEach((item: any, index: Number) => {
+        const modelkey = item.modelValueName
+        if (findModelStr === modelkey) {
+          parentNode.splice(preIndex, 1)
+        } else if (item.children && item.children.length > 0) {
+          recursionDelDynFormItem(chilNode, item.children, index, findModelStr)
+        }
+      })
+    }
+    /**
+     * 保留字段组件删除操作
+     */
+    const delKeepField = (item: JsonKeyVal) => {
+      ElMessageBox.confirm(
+        '确定删除【' + item.labelName || '该组件' + '】组件?',
+        '系统提示',
+        {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }
+      )
+        .then(() => {
+          const dynFormItem = dynaFormData.formItem
+          recursionDelDynFormItem('', dynFormItem, 0, item.modelValueName)
+          recursionMoveDynFormItem('', dynFormItem, -1, 'el-row')
+          // nextTick(() => {
+          //   recursionMoveDynFormItem('', dynFormItem, -1, 'el-row')
+          // })
+
+          // 同时解除保留字段禁用
+          keepFieldArr.forEach((kItem: JsonKeyVal) => {
+            if (kItem.value === item.modelValueName) {
+              kItem.disabled = false
+            }
+          })
+        })
+        .catch((e: any) => {
+          console.log(e)
+          ElMessage({
+            type: 'info',
+            message: 'Delete canceled'
+          })
+        })
     }
     return {
       formInline,
@@ -557,7 +728,9 @@ export default defineComponent({
       uploadFileCtrl,
       customerRules,
       customerForm,
-      confirmAddCustField
+      confirmAddCustField,
+      delKeepField,
+      keepFieldSlotArr
     }
   }
 })
@@ -571,7 +744,7 @@ export default defineComponent({
       background-color: #fff;
     }
     :deep(.adjues-proj-code-width) {
-      width: 94%;
+      width: 93%;
     }
 
     :deep(.adjuest-width-hundred) {
@@ -586,6 +759,13 @@ export default defineComponent({
       display: inline-block;
       width: 4%;
       height: 100%;
+      margin-left: 4px;
+      cursor: pointer;
+    }
+    .keep-field-iconfont {
+      &:hover {
+        color: red !important;
+      }
     }
     :deep(.el-row) {
       margin-bottom: 18px;

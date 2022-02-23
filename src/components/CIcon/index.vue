@@ -48,7 +48,7 @@ export default defineComponent({
   setup(props: Props) {
     const custClassOnIcon = computed((): string => {
       if (props.custClass) {
-        return 'iconfont' + props.custClass
+        return 'iconfont ' + props.custClass
       } else {
         return 'iconfont'
       }
