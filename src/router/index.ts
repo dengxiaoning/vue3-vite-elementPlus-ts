@@ -70,8 +70,21 @@ export const constantRoutes = [
           title: 'elementIcon案例',
           index: '4'
         },
+      },
+      {
+        path: '/dragDialog',
+        name:'dragDialog',
+        component: () => import('views/dragDialog/index.vue'),
+        meta: {
+          auth: ['admin', 'test'],
+          icon: 'carbon:rule-test',
+          isAffix: false,
+          isHide: false,
+          isKeepAlive: true,
+          title: '拖拽dialog',
+          index: '5'
+        },
       }
-      
     ]
   },
   {

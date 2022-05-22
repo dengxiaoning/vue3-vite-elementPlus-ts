@@ -240,7 +240,7 @@ export default {
       }
     }
   }
-  ::v-deep(.el-breadcrumb__separator) {
+  :deep(.el-breadcrumb__separator) {
     opacity: 0.7;
     color: var(--bg-topBarColor);
   }

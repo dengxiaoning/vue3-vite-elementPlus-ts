@@ -299,7 +299,7 @@ export default {
   flex: 1;
   background-color: #ffffff;
   border-bottom: 1px solid #f1f2f3;
-  ::v-deep(.el-scrollbar__wrap) {
+  :deep(.el-scrollbar__wrap) {
     overflow-x: auto !important;
   }
   &-ul {

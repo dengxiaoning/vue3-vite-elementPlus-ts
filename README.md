@@ -70,10 +70,6 @@
 - 三维
   ![threedimensional](https://github.com/dengxiaoning/vue3-vite-elementPlus-ts/blob/master/src/assets/image/example/threeDimensional.gif)
 
-## 在线预览
-
-https://www.benpaodehenji.com/csdata
-
 ## 项目设置
 
 ```
@@ -92,8 +88,20 @@ yarn dev  or  npm run dev
 yarn build or npm run build
 ```
 
+## iconify 使用方法
+
+[官网 https://icon-sets.iconify.design](https://icon-sets.iconify.design)
+
+```
+ <CIcon icon-class="bx:time-five" icon-color="#333" />
+```
+
 ## 浏览器支持
 
 本地开发推荐使用`Chrome 80+` 浏览器
 
 支持现代（chrome，Firefox，Microsoft edge，etc.）浏览器, 不支持 IE
+
+## 在线预览
+
+https://www.benpaodehenji.com/csdata

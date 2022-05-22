@@ -76,7 +76,7 @@ export default defineComponent({
   position: relative;
   height: 100%;
   width: 100%;
-  ::v-deep(.layout-aside-width-default) {
+  :deep(.layout-aside-width-default) {
     width: 200px !important;
   }
 }
