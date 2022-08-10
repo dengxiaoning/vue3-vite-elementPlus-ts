@@ -105,7 +105,7 @@ class Map2dHelper {
     return new TileLayer({
       source: new WMTS({
         name: "中国矢量",
-        url: "http://t0.tianditu.com/vec_c/wmts?tk=949bca1a33050ebcd6fda8d7fcd0817a",
+        url: "http://t0.tianditu.com/vec_c/wmts?tk=7eb11c0c503429878691ac917238f87f",
         layer: "vec",
         style: "default",
         matrixSet: "c",
@@ -128,7 +128,7 @@ class Map2dHelper {
     return new TileLayer({
       source: new WMTS({
         name: "中国矢量注记1-4级",
-        url: "http://t0.tianditu.com/cva_c/wmts?tk=949bca1a33050ebcd6fda8d7fcd0817a",
+        url: "http://t0.tianditu.com/cva_c/wmts?tk=7eb11c0c503429878691ac917238f87f",
         layer: "cva",
         style: "default",
         matrixSet: "c",

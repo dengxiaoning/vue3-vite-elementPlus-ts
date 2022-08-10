@@ -1,5 +1,33 @@
 [
   {
+    "name": "dynForm",
+    "path": "dynForm",
+    "component": "dynForm/index",
+    "append":"root",
+    "meta": {
+      "auth": ["admin", "test"],
+      "title": "动态创建form案例",
+      "icon": "carbon:rule-test",
+      "isAffix": false,
+      "isHide": false,
+      "isKeepAlive": true
+    }
+  },
+  {
+    "name": "dragDialog",
+    "path": "dragDialog",
+    "component": "dragDialog/index",
+    "append":"root",
+    "meta": {
+      "auth": ["admin", "test"],
+      "title": "拖拽dialog",
+      "icon": "carbon:rule-test",
+      "isAffix": false,
+      "isHide": false,
+      "isKeepAlive": true
+    }
+  },
+  {
     "name": "sysManage",
     "path": "/sysManage",
     "component": "Layout",

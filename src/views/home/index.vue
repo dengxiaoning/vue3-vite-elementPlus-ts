@@ -8,7 +8,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'store/index'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import HelloWorld from '@/components/HelloWorld.vue'
 import ProcessCom from './process.vue'
 
@@ -35,11 +35,14 @@ export default defineComponent({
       count.value += 1
     }
 
-    //router是全局路由对象，route= userRoute()是当前路由对象
+    //useRouter是全局路由对象，route= userRoute()是当前路由对象
     let route = useRoute()
+    let RouterAll = useRouter()
     let num = route.query.num
     //let num = route.params.num;
     console.log('it receive params is :', num)
+    // 获取所有路由列表
+    // console.log(RouterAll.getRoutes())
     return {
       count,
       addCount

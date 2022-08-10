@@ -91,21 +91,20 @@ const custAddRoutes = (routes:AppRouteRecordRaw[], parentName:string = " ",obtai
       const componentString = item.component.replace(/^\/+/, ""), // 过滤字符串前面所有 '/' 字符
         componentPath = componentString.replace(/\.\w+$/, ""); // 过滤掉后缀名，为了让 import 加入 .vue ，不然会有警告提示...
 
-     
       const eachRoute = {
         path: item.path,
         redirect: item.redirect,
         name: item.name, 
-        // component: item.component === 'Layout' ? Layout : () => import(`./views/${componentPath}.vue`) ,
         component: item.component === 'Layout' ? Layout : obtainModules(`./views/${componentPath}.vue`) ,
         meta: item.meta 
       }
 
-      parentName ? router.addRoute(parentName, eachRoute) : router.addRoute(eachRoute);
+      parentName||item.append ? router.addRoute(parentName||item.append, eachRoute) : router.addRoute(eachRoute);
 
       if (item.children && item.children.length) {
         custAddRoutes(item.children, item.name,obtainModules);
       }
+
     }
   })
 
