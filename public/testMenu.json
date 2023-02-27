@@ -1,7 +1,7 @@
 [
   {
     "name": "dynForm",
-    "path": "dynForm",
+    "path": "/dynForm",
     "component": "dynForm/index",
     "append":"root",
     "meta": {
@@ -15,7 +15,7 @@
   },
   {
     "name": "dragDialog",
-    "path": "dragDialog",
+    "path": "/dragDialog",
     "component": "dragDialog/index",
     "append":"root",
     "meta": {
