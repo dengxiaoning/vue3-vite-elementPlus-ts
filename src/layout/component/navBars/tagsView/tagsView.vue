@@ -121,7 +121,17 @@ export default {
     const addTagsView = (routeAgr: any) => {
       if (state.tagsViewList.some((v) => v.path === routeAgr.path)) return false
 
-      const ff = Object.assign({}, routeAgr)
+         /**
+       * 【notice】
+       * The following notation will throw an "Avoid app logic that relies on enumerating keys on a component instance.
+       * The keys will be empty in production mode to avoid performance overhead." exception.
+       */
+      // const remRef = JSON.parse(JSON.stringify(routeAgr ))
+      const { name, path, component, meta, children } = routeAgr
+      const remRef = JSON.parse(
+        JSON.stringify({ name, path, component, meta, children })
+      )
+      const ff = Object.assign({}, remRef)
       state.tagsViewList.push(ff)
       addBrowserSetSession(state.tagsViewList)
     }
